@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block head_options %}
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css"/>
+    <script src="/static/js/market.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div id="categories" class="acrylic">
+        <div id="categoriesHeader">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#e4e4e4" class="icon" width="30" height="30" viewBox="0 0 24 24">
+                <path d="M4 11h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm10 0h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zM4 21h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm13 0c2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4 1.794 4 4 4z"/>
+            </svg>
+            Каталог
+        </div>
+        <div id="categoriesItems">
+            {% for cat in categories %}
+                <a href="/category/{{ cat.id }}" class="categoryItem">
+                    {{ cat.title }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div id="items">
+        {% if last_market_items %}
+            <div class="itemsBlock">
+                <h2 class="itemsBlockHeader">Новi товари</h2>
+                <div class="items">
+                    {% if last_market_items %}
+                        {% for item in last_market_items %}
+                            <div class="item">
+                                <a href="/item/{{ item.id }}">
+                                    <img src="/static/img/{{ item.images[0] }}" class="itemThumbnail">
+                                </a>
+                                <div class="itemInfo">
+                                    <a href="/item/{{ item.id }}" class="itemTitle">{{ item.title }}</a>
+                                </div>
+                                <div class="itemPriceInfo">
+                                    <span class="itemPrice">{{ item.price }}₴</span>
+                                    {% if user %}
+                                        <button type="button" class="addItemToCartButton itemID-{{ item.id }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" width="26" height="26" viewBox="0 0 16 16">
+                                                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                                            </svg>
+                                            {% if item.id in user.cart %}
+                                                <span>В кошику</span>
+                                            {% else %}
+                                                <span>До кошика</span>
+                                            {% endif %}
+                                        </button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if item_blocks %}
+            {% for cat_title, items in item_blocks.items() %}
+                <div class="itemsBlock">
+                    <h2 class="itemsBlockHeader">{{ cat_title }}</h2>
+                    <div class="items">
+                        {% if items %}
+                            {% for item in items %}
+                                <div class="item">
+                                    <a href="/item/{{ item.id }}">
+                                        <img src="/static/img/{{ item.images[0] }}" class="itemThumbnail">
+                                    </a>
+                                    <div class="itemInfo">
+                                        <a href="/item/{{ item.id }}" class="itemTitle">{{ item.title }}</a>
+                                    </div>
+                                    <div class="itemPriceInfo">
+                                        <span class="itemPrice">{{ item.price }}₴</span>
+                                        {% if user %}
+                                            <button type="button" class="addItemToCartButton itemID-{{ item.id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" width="26" height="26" viewBox="0 0 16 16">
+                                                    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                                                </svg>
+                                                {% if item.id in user.cart %}
+                                                    <span>В кошику</span>
+                                                {% else %}
+                                                    <span>До кошика</span>
+                                                {% endif %}
+                                            </button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        {% else %}
+                            Нiчого не знайдено
+
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <!-- Рекомендацiї -->
+    </div>
+{% endblock %}
+
+{% block popUpContent %}
+    {% if user %}
+        <div id="cartPopup" class="acrylic">
+            {% for item in cart_items %}
+                <div class="cartItem">
+                    <a href="/item/{{ item.id }}">
+                        <img src="/static/img/{{ item.images[0] }}" class="itemThumbnail">
+                    </a>
+                    <div class="itemInfo">
+                        <a href="/item/{{ item.id }}" class="itemTitle">{{ item.title }}</a>
+                    </div>
+                    <div class="itemPriceInfo">
+                        <span class="itemPrice">{{ item.price }}₴</span>
+                        <button type="button" class="removeItemFromCartButton itemID-{{ item.id }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M4 7h16"></path>
+                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                                <path d="M10 12l4 4m0 -4l-4 4"></path>
+                            </svg>
+                            Видалити
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+            {% if cart_items %}
+                <div class="cartBuyItems">
+                    <button type="button" id="cartBuyItemsButton">
+                        {{ cart_items | sum("price") }}₴ Оплатити
+                    </button>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

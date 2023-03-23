@@ -1,0 +1,45 @@
+#content {
+    flex: 1;
+}
+
+#nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    height: 46px;
+    width: 100%;
+    border-bottom: 1.5px solid var(--accent-color);
+    background-color: var(--primary-color);
+}
+
+#nav .headerItem:first-child {
+    margin-right: unset;
+}
+
+#nav .headerItem:last-child {
+    margin-left: unset;
+}
+
+
+@media screen and (max-width: 580px) {
+    #nav {
+        gap: 0;
+        height: 54px;
+    }
+
+}
+
+@media screen and (max-width: 380px) {
+    #nav {
+        gap: 0;
+        height: 54px;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    #nav .headerItem:not(:first-child):not(:last-child) {
+        display: flex;
+    }
+}

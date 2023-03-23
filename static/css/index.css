@@ -1,0 +1,220 @@
+#content {
+    flex: 1;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+
+#categories {
+    margin-right: auto;
+    height: calc(100%);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#categoriesHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    padding: 12.5px;
+    color: var(--text-color);
+    background-color: var(--accent-color);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#categoriesItems {
+    display: flex;
+    flex-direction: column;
+}
+
+.categoryItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 200px;
+    border-radius: 7.5px;
+    padding: 10px 5px 10px 5px;
+    margin: 5px 10px 5px 10px;
+    font-size: 22px;
+    background-color: var(--accent-color);
+    transition: background 0.3s;
+}
+
+.categoryItem:first-child {
+    margin-top: 10px;
+}
+
+.categoryItem:hover {
+    background-color: var(--active-btn-color2);
+}
+
+
+#items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    gap: 10px;
+}
+
+.itemsBlock {
+    width: calc(100% - 150px);
+    background-color: var(--accent-color);
+    border-radius: 10px;
+    padding: 12.5px;
+    margin: 50px 100px 0px 50px;
+}
+
+.itemsBlock:last-child {
+    margin-bottom: 50px;
+}
+
+.itemsBlockHeader {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.items {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 15px;
+}
+
+.itemThumbnail {
+    width: 100%;
+    min-width: 100%;
+    min-height: 242px;
+    border-radius: 10px;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #00000020;
+    border-radius: 10px;
+    padding: 10px;
+    width: 225px;
+    transition: transform 0.3s;
+}
+
+.item:hover {
+    transform: scale(1.025);
+}
+
+.itemTitle {
+    font-size: 22px;
+}
+
+.itemPriceInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.addItemToCartButton, .removeItemFromCartButton, #cartBuyItemsButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.addItemToCartButton:hover, .removeItemFromCartButton:hover, #cartBuyItemsButton:hover {
+    background-color: var(--accent-color);
+}
+
+/* Cart pop up */
+#cartPopupToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+#cartPopupToggle:hover {
+    background-color: var(--accent-color);
+}
+
+#cartPopup {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    overflow-y: auto;
+    min-height: 400px;
+    max-height: 600px;
+    width: 800px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+
+.cartItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    gap: 10px;
+    background-color: #ffffff30;
+}
+
+.cartItem .itemThumbnail {
+    min-height: unset;
+    width: 120px;
+}
+
+.cartItem .itemInfo {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.cartItem .itemPriceInfo {
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 0 0 auto;
+}
+
+.removeItemFromCartButton, #cartBuyItemsButton {
+    background-color: #00000030;
+}
+
+#cartBuyItemsButton {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+
+/* Media queries */
+@media screen and (max-width: 500px) {
+    #categoriesHeader {
+        font-size: 26px;
+    }
+
+    .categoryItem {
+        width: auto;
+        font-size: 20px;
+    }
+}

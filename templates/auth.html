@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block head_options %}
+    <link rel="stylesheet" type="text/css" href="/static/css/auth.css"/>
+    <script src="/static/js/auth.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div id="authWrapper">
+        <form id="authBox">
+            <div id="mainAuthContainer">
+                <div id="authHeader" class="popupHeader">
+                    {% if method == "login" %}
+                        Авторизація
+                    {% elif method == "register" %}
+                        Реєстрація
+                    {% endif %}
+                </div>
+                <div id="authContainer" class="grow">
+                    <div id="authError" class="warning h-centered" style="display: none;"></div>
+                    {% if method == "register" %}
+                        <div id="authUsername" class="mainInput">
+                            <label for="authUsernameInput">Ім'я користувача</label>
+                            <div class="inputWrapper">
+                                <input type="text" id="authUsernameInput" name="authUsernameInput" maxlength="24" autocomplete="off" autocorrect="off" spellcheck="false">
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div id="authEmail" class="mainInput">
+                        <label for="authEmailInput">Адреса електронної пошти</label>
+                        <div class="inputWrapper">
+                            <input type="email" id="authEmailInput" name="authEmailInput" maxlength="48" autocomplete="off" autocorrect="off" spellcheck="false">
+                        </div>
+                    </div>
+                    <div id="authPassword" class="mainInput">
+                        <label for="authPasswordInput">Пароль</label>
+                        <div class="inputWrapper">
+                            <input type="password" id="authPasswordInput" name="authPasswordInput" maxlength="64" autocomplete="off" autocorrect="off" spellcheck="false">
+                        </div>
+                        {% if method == "login" %}
+                            <button type="button" id="restorePassword" class="lookLink">
+                                <div>Забули пароль?</div>
+                            </button>
+                        {% endif %}
+                    </div>
+                    <button type="button" id="authSubmit" class="submitButton">
+                        {% if method == "login" %}
+                            Увійти
+                        {% elif method == "register" %}
+                            Зареєструватися
+                        {% endif %}
+                    </button>
+                    {% if method == "login" %}
+                        <div id="otherAuthOption">
+                            Немає акаунта? <a href="{{ url_for('auth', method='register') }}" class="lookLink">Зареєструватися</a>
+                        </div>
+                    {% elif method == "register" %}
+                        <div id="otherAuthOption">
+                            Вже є акаунт? <a href="{{ url_for('auth', method='login') }}" class="lookLink">Увійти</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
